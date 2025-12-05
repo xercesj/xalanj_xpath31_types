@@ -19,23 +19,22 @@ import org.apache.xpath.objects.ResultSequence;
 
 /**
  * A representation of the XSCtrType datatype.
- * 
- * All the XML Schema built-in types that have constructor functions
- * as defined by XPath 3.1 F&O spec, XalanJ data type classes for those 
+ *
+ * <p>All the XML Schema built-in types that have constructor functions
+ * as defined by XPath 3.1 F&amp;O spec, XalanJ data type classes for those
  * XML Schema built-in types have this class as a parent or an ancestor 
- * class.
+ * class.</p>
  */
 public abstract class XSCtrType extends XSAnyAtomicType {
 
     private static final long serialVersionUID = -1177633885817069140L;
 
     /**
-	 * This function is used for, XML Schema built-in types 
-	 * constructor functions.
-	 * 
-	 * For e.g, xs:string($arg as xs:anyAtomicType?) as xs:string? ,
-	 *          xs:boolean($arg as xs:anyAtomicType?) as xs:boolean? etc
-	 *          
+	 * This function is used for, XML Schema built-in types constructor functions.
+	 *
+	 * <p>For e.g, xs:string($arg as xs:anyAtomicType?) as xs:string? ,
+	 *          xs:boolean($arg as xs:anyAtomicType?) as xs:boolean? etc</p>
+	 *
 	 * @param arg    either an empty sequence, or an XML Schema atomic type
 	 * 
 	 * @return       the resulting ResultSequence

@@ -18,9 +18,10 @@ import org.apache.xpath.objects.XObject;
 
 /**
  * Base class for all the XML Schema types.
- * 
- * (please refer, https://www.w3.org/TR/xmlschema11-2/#built-in-datatypes
- *  that illustrates the XML Schema 1.1 built-in datatypes hierarchy)
+ *
+ * <p>(please refer,
+ * <a href="https://www.w3.org/TR/xmlschema11-2/#built-in-datatypes">https://www.w3.org/TR/xmlschema11-2/#built-in-datatypes</a>
+ * that illustrates the XML Schema 1.1 built-in datatypes hierarchy)</p>
  */
 public abstract class XSAnyType extends XObject {
 	

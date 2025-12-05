@@ -13,6 +13,8 @@ package xml.xpath31.processor.types;
 
 import org.apache.xpath.objects.ResultSequence;
 
+import javax.xml.transform.TransformerException;
+
 /**
  * A representation of the xs:token datatype.
  */
@@ -58,14 +60,14 @@ public class XSToken extends XSNormalizedString {
 
 	/**
 	 * Creates a new ResultSequence consisting of the extractable String in the
-	 * supplied ResultSequence
-	 * 
-	 * @param arg
-	 *            The ResultSequence from which to extract the String
-	 * @return New ResultSequence consisting of the supplied String
-	 * @throws DynamicError
+	 * supplied ResultSequence.
+	 *
+	 * @param arg the ResultSequence from which to extract the String
+	 * @return a new ResultSequence consisting of the supplied String
+	 * @throws TransformerException if the supplied string value does not
+     *                              satisfy constraints for the datatype
 	 */
-	public ResultSequence constructor(ResultSequence arg) throws javax.xml.transform.TransformerException {
+	public ResultSequence constructor(ResultSequence arg) throws TransformerException {
 		ResultSequence resultSeq = new ResultSequence();
 
 		if (arg.size() == 0) {

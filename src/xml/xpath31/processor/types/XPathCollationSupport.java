@@ -24,10 +24,10 @@ import javax.xml.transform.TransformerException;
 /**
  * This class provides, collation support for XalanJ's XPath 3.1 
  * implementation.
- * 
- * Ref : https://www.w3.org/TR/xpath-functions-31/#collations
- * 
- * @author Mukul Gandhi <mukulg@apache.org>
+ *
+ * Ref : <a href="https://www.w3.org/TR/xpath-functions-31/#collations">https://www.w3.org/TR/xpath-functions-31/#collations</a>
+ *
+ * @author <a href="mailto:mukulg@apache.org">Mukul Gandhi</a>
  *
  * @xsl.usage advanced
  */
@@ -197,7 +197,7 @@ public class XPathCollationSupport {
     
     /**
      * This method compares, two string values using 'Unicode Codepoint Collation'
-     * as specified by XPath 3.1 F&O spec.
+     * as specified by XPath 3.1 F&amp;O spec.
      *
      * @param str1    the first string
      * @param str2    the second string
@@ -218,7 +218,7 @@ public class XPathCollationSupport {
     /**
      * This method compares two int[] arrays comprising unicode codepoints 
      * (corresponding to the strings to be compared), according to 'Unicode 
-     * Codepoint Collation' as defined by XPath 3.1 F&O spec.
+     * Codepoint Collation' as defined by XPath 3.1 F&amp;O spec.
      */
     private int compareCodepointArrays(int[] codePointsArr1, int[] codePointsArr2) {
        
@@ -298,7 +298,7 @@ public class XPathCollationSupport {
     }
     
     /**
-     * This method implements, 'Unicode Collation Algorithm' as specified by XPath 3.1 F&O spec
+     * This method implements, 'Unicode Collation Algorithm' as specified by XPath 3.1 F&amp;O spec
      * (which in turn is based on UTS #10 [Unicode Technical Standard #10 : Unicode Collation
      * Algorithm]).
      * 
