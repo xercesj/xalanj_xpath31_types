@@ -21,6 +21,8 @@ import org.apache.xpath.objects.ResultSequence;
 import org.apache.xpath.objects.XObject;
 import org.apache.xpath.objects.XString;
 
+import java.net.URI;
+
 /**
  * An XML Schema data type representation, of the xs:anyURI datatype.
  */
@@ -30,24 +32,37 @@ public class XSAnyURI extends XSCtrType {
 	
 	private static final String XS_ANY_URI = "xs:anyURI";
 	
-	private String _value;
+	private String _value; // why not a java.net.URI?
 	
     private XPathContext fXctxt = new XPathContext();
     
     private XPathCollationSupport fXpathCollationSupport = fXctxt.getXPathCollationSupport();
 
-    /*
-     * Class constructor.
-    */
-	public XSAnyURI(String str) {
-		_value = str;
+    /**
+     * Construct from a Java string value.
+     * <p>See <a href="https://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers (URI): Generic Syntax</a></p>
+     *
+     * @param uri a string that contain a valid URI
+     */
+	public XSAnyURI(final String uri) {
+		_value = uri;
 	}
 
-    /*
-     * Class constructor.
-    */
+    /**
+     * Construct from a Java URI value.
+     *
+     * @param uri a URI that contain a valid URI
+     * @see URI
+     */
+    public XSAnyURI(final URI uri) {
+        _value = uri.toString();
+    }
+
+    /**
+     * Default constructor. It's preferable to use {@link #XSAnyURI(URI)}
+     */
 	public XSAnyURI() {
-		this(null);
+		this((String) null);
 	}
 
 	@Override
@@ -187,7 +202,8 @@ public class XSAnyURI extends XSCtrType {
 
 		return isGreaterThan;
 	}
-	
+
+	@Override
 	public int getType() {
         return CLASS_XS_ANY_URI;
     }
