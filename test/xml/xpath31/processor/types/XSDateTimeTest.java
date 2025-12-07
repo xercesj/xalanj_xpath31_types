@@ -1,5 +1,6 @@
 package xml.xpath31.processor.types;
 
+import org.apache.xpath.objects.ResultSequence;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -9,6 +10,18 @@ import javax.xml.transform.TransformerException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class XSDateTimeTest {
+
+    @Test
+    void constructor () throws TransformerException {
+        final ResultSequence input = new ResultSequence();
+        input.add(XSDateTime.parseDateTime("1961-12-15T17:31:00Z"));
+
+        final ResultSequence sequence = new XSDateTime().constructor(input);
+
+        assertNotNull(sequence);
+        assertEquals(1, sequence.size());
+        assertEquals("1961-12-15T17:31:00Z", ((XSDateTime)sequence.item(0)).stringValue());
+    }
 
     @ParameterizedTest
     @ValueSource(strings = {
