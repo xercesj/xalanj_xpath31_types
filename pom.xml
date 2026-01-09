@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.apache.xerces</groupId>
-    <artifactId>xalanj_xpath31_types</artifactId>
+    <artifactId>xalan-java_xpath31_types</artifactId>
     <version>0.1</version>
 
     <name>XalanJ Xpath 3.1 types</name>
