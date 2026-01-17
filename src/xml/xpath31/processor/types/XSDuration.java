@@ -127,7 +127,8 @@ public class XSDuration extends XSCtrType {
 		
 		String tret = "";
 
-		if (negative() && !(days() == 0 && hours() == 0 && seconds() == 0))
+		//if (negative() && !(days() == 0 && hours() == 0 && seconds() == 0))
+		if (negative())	
 			returnVal += "-";
 
 		returnVal += "P";
