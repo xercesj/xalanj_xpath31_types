@@ -317,26 +317,33 @@ public class XSDuration extends XSCtrType {
 		}
 
 		try {
-			int index = pstr.indexOf('Y');
+			int index = 0;			
 			boolean isAction = false;
+			
+			if (!pstr.startsWith("T")) {
+				index = pstr.indexOf('Y');				
 
-			if (index != -1) {
-				String digit = pstr.substring(0, index);
-				years = Integer.parseInt(digit);
-				pstr = pstr.substring(index + 1, pstr.length());
-				isAction = true;
+				if (index != -1) {
+					String digit = pstr.substring(0, index);
+					years = Integer.parseInt(digit);
+					pstr = pstr.substring(index + 1, pstr.length());
+					isAction = true;
+				}
+
+				index = pstr.indexOf('M');
+				if (index != -1) {
+					String digit = pstr.substring(0, index);
+					months = Integer.parseInt(digit);
+					pstr = pstr.substring(index + 1, pstr.length());
+					isAction = true;
+				}
+
+				// days
+				index = pstr.indexOf('D');
 			}
-
-			index = pstr.indexOf('M');
-			if (index != -1) {
-				String digit = pstr.substring(0, index);
-				months = Integer.parseInt(digit);
-				pstr = pstr.substring(index + 1, pstr.length());
-				isAction = true;
+			else {
+				index = -1;
 			}
-
-			// days
-			index = pstr.indexOf('D');
 
 			if (index == -1) {
 				if (pstr.startsWith("T")) {

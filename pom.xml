@@ -22,15 +22,11 @@
     </properties>
 
     <dependencies>
-        <!-- Until xalan-java-3.0.1 is published, use a local build from the xalan-java repo -->
         <dependency>
             <groupId>org.apache.xsl</groupId>
             <artifactId>xalan-java</artifactId>
-            <systemPath>${project.basedir}/libs/xalan-java-3.0.1-SNAPSHOT.jar</systemPath>
-            <version>3.0.1</version>
-            <scope>system</scope>
+            <version>3.0.1-SNAPSHOT</version>
         </dependency>
-
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
