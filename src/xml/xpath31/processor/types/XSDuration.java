@@ -163,11 +163,13 @@ public class XSDuration extends XSCtrType {
 			String doubStr = (new Double(seconds).toString());
 			if (doubStr.endsWith(".0")) {				
 				tret += doubStr.substring(0, doubStr.indexOf(".0")) + "S";
-			} else {
+			} 
+			else {
 				tret += seconds + "S";
 			}
 			didSomething = true;
-		} else if (!didSomething) {
+		} 
+		else if (!didSomething) {
 		    tret += "0S";
 		}
 		
@@ -308,10 +310,12 @@ public class XSDuration extends XSCtrType {
 		if (strVal.startsWith("-P")) {
 			isDurationNegative = true;
 			pstr = strVal.substring(2, strVal.length());
-		} else if (strVal.startsWith("P")) {
+		} 
+		else if (strVal.startsWith("P")) {
 			isDurationNegative = false;
 			pstr = strVal.substring(1, strVal.length());
-		} else {
+		} 
+		else {
 		    throw new TransformerException("XTTE0570 : The supplied string value '" + strVal + "' "
 		                                                                                         + "cannot be parsed to a xs:duration value.");
 		}
@@ -322,7 +326,6 @@ public class XSDuration extends XSCtrType {
 			
 			if (!pstr.startsWith("T")) {
 				index = pstr.indexOf('Y');				
-
 				if (index != -1) {
 					String digit = pstr.substring(0, index);
 					years = Integer.parseInt(digit);
@@ -332,9 +335,28 @@ public class XSDuration extends XSCtrType {
 
 				index = pstr.indexOf('M');
 				if (index != -1) {
-					String digit = pstr.substring(0, index);
-					months = Integer.parseInt(digit);
-					pstr = pstr.substring(index + 1, pstr.length());
+					/**
+					 * An xs:duration string value, may contain the character
+					 * 'M' twice, one for month value and another for time's minute 
+					 * component.
+					 */
+					int idxT = pstr.indexOf('T');
+					if (idxT == -1) {
+						String digit = pstr.substring(0, index);
+						months = Integer.parseInt(digit);
+						pstr = pstr.substring(index + 1, pstr.length());
+					}
+					else {
+						String prefix1 = pstr.substring(0, idxT);						
+						int idx_m = prefix1.indexOf('M');
+						if (idx_m != -1) {
+							String digit = prefix1.substring(0, idx_m);
+							months = Integer.parseInt(digit);
+							index = pstr.indexOf('M'); 
+							pstr = pstr.substring(index + 1, pstr.length());
+						}
+					}
+					
 					isAction = true;
 				}
 
@@ -349,14 +371,16 @@ public class XSDuration extends XSCtrType {
 				if (pstr.startsWith("T")) {
 					tstr = pstr.substring(1, pstr.length());
 				}
-			} else {
+			} 
+			else {
 				String digit = pstr.substring(0, index);
 				days = Integer.parseInt(digit);
 				tstr = pstr.substring(index + 1, pstr.length());
 
 				if (tstr.startsWith("T")) {
 					tstr = tstr.substring(1, tstr.length());
-				} else {
+				} 
+				else {
 					tstr = "";
 					isAction = true;
 				}
@@ -386,6 +410,7 @@ public class XSDuration extends XSCtrType {
 				tstr = tstr.substring(index + 1, tstr.length());
 				isAction = true;
 			}
+			
 			if (!isAction) {
 			    throw new TransformerException("XTTE0570 : The supplied string value '" + strVal + "' "
                                                                                                + "cannot be parsed to a xs:duration value.");
