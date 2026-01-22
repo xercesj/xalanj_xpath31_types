@@ -390,16 +390,24 @@ public class XSDate extends XSCalendarType {
                                                                                  + "xs:dayTimeDuration are only ones that may be subtracted from an xs:date value.");
         }
         
-        if (xObject instanceof XSDate) {
-           Calendar cal1 = getCalendar();
-           Calendar cal2 = ((XSDate)xObject).getCalendar();
-           long diffDurationMilliSecs = cal1.getTimeInMillis() - cal2.getTimeInMillis();
-           result = new XSDuration(diffDurationMilliSecs / 1000);
+        if (xObject instanceof XSDate) {                   	        	
+        	Calendar cal1 = getCalendar();
+            Calendar cal2 = ((XSDate)xObject).getCalendar();            
+            long diff1 = (cal1.getTimeInMillis() - cal2.getTimeInMillis());
+            long daysFactor = (1000 * 60 * 60 * 24); 
+            long days = (diff1 / daysFactor);
+            long modulusValue = (diff1 % daysFactor); 
+            if (modulusValue > 0) {
+               days++;
+            }
+            
+            result = XSDayTimeDuration.parseDayTimeDuration("P" + days + "D");
         }
         else if (xObject instanceof XSYearMonthDuration) {
-           XSYearMonthDuration argVal = (XSYearMonthDuration)xObject;
+           XSYearMonthDuration argVal = (XSYearMonthDuration)xObject;           
            Calendar cal1 = (Calendar)((getCalendar()).clone());
            cal1.add(Calendar.MONTH, argVal.monthValue() * -1);
+           
            result = new XSDate(cal1, getTimezone());
         }
         else if (xObject instanceof XSDayTimeDuration) {
@@ -407,6 +415,7 @@ public class XSDate extends XSCalendarType {
            double argValSecs = argVal.value();
            Calendar cal1 = (Calendar)((getCalendar()).clone());
            cal1.setTimeInMillis(cal1.getTimeInMillis() + ((((long)argValSecs * 1000)) * -1));
+           
            result = new XSDate(cal1, getTimezone());
         }
         
